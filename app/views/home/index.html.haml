@@ -1,2 +1,54 @@
-%h1 Home#index
-%button.btn.btn-primary{:type => "button"} Button
+.hero-wraper 
+  %img.home_image_hero{:alt => "skillup", :src => "/assets/home_banner.jpg"}
+  .hero-search-box.shadow
+    .h1.fw-bolder   
+      Learn from the best 
+    .h5 Real-world experts teaching real-world skills, from $11.99 — through Mar. 25.
+    = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+      .d-flex.mt-4.border.border-secondary.rounded
+        =f.search_field :title_cont, autocomplete:"off", placeholder: "What do you want to learn?", :type => "search", class:"form-control  hero-input-field"
+        %button.btn.btn-sm.btn-transparent.hero-search-btn.ps-3.pe-3{:type => "submit"} 
+          .fa.fa-search
+
+ 
+
+.border-bottom.py-4.container-fluid.px-5.shadow-sm.mt-2.bg-white
+  .row
+    .col-4
+      .d-flex  
+        .d-flex.align-items-center
+          .fa.fa-play-circle.text-secondary.fa-2x
+        .px-3  
+          .h6.fw-bolder 40000 online courses
+          .p Enjoy a variety of fresh topics
+
+    .col-4
+      .d-flex.justify-content-center 
+        .d-flex.align-items-center
+          .fa.fa-certificate.text-secondary.fa-2x
+        .px-3  
+          .h6.fw-bolder Expert instruction
+          .p Find the right instructor for you
+
+    .col-4
+      .d-flex.justify-content-end  
+        .d-flex.align-items-center
+          .fa.fa-check-circle.text-secondary.fa-2x
+        .px-3  
+          .h6.fw-bolder Lifetime access
+          .p Learn on your schedule
+
+.custom-conteiner.mt-5.pt-3.mb-4
+  .h4.fw-bolder.pb-2 Students are viewing
+  .row
+    - @courses.each do |course|
+      = render "courses/course", course:course
+    
+  .d-flex.justify-content-center.py-5.border-bottom.border-top.mt-4
+    .width-30
+      %img.home_image_hero.shadow{:alt => "skillup", :src => "/assets/home_instructor.jpg"}
+    .width-30.my-auto.ps-5.ms-4
+      .h2.fw-bolder Become an instructor
+      .h5 Top instructors from around the world teach millions of students on Udemy. We provide the tools and skills to teach what you love. 
+      .btn.btn-dark.fw-bold.py-2.mt-3 Start teaching today
+      

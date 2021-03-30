@@ -2,7 +2,13 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+    email_prefix: '[SkillUp Error] ',
+    sender_address: %{"Skill Up" <support@skillup.com>},
+    exception_recipients: %w{aliqadri100@gmail.com}
+  }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

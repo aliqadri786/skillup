@@ -1,0 +1,12 @@
+.container.py-4
+  .h5.py-2.fw-bold Users created per day
+  = line_chart charts_users_per_day_path
+
+  .h5.py-2.fw-bold.mt-4 Enrollments Created per day
+  = column_chart charts_enrollments_per_day_path
+
+  .h5.py-2.fw-bold.mt-4 Popular Courses
+  = bar_chart charts_course_popularity_path
+
+  .h5.py-2.fw-bold.mt-4 Most Paid Courses
+  = bar_chart charts_money_makers_path

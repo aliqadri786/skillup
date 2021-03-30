@@ -1,0 +1,23 @@
+.container.py-5
+  .row 
+    .col-4.offset-4.shadow-sm.px-4.py-4.rounded
+      .fw-bold.text-center Log In to Your Skill Up Account! 
+      %hr
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-inputs
+
+          
+          .border.d-flex.border-dark.rounded
+            .d-flex.align-items-center.justify-content-center.ps-3.pe-1
+              .fa.fa-envelope.text-muted
+            .d-flex= f.input :email, required: false, label: false, placeholder:"Email",  autofocus: true,input_html: { autocomplete: "email", class:"py-2 no-focus-input width-100 height-48px font-18" } 
+          .border.d-flex.border-dark.rounded.mt-2
+            .d-flex.align-items-center.justify-content-center.ps-3.pe-1
+              .fa.fa-lock.text-muted
+            = f.input :password,required: false,label: false, placeholder:"Password", input_html: { autocomplete: "current-password", class:"py-2 no-focus-input width-100 height-48px font-18" } 
+            
+          .mt-3.d-flex.justify-content-center= f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+       
+        .form-actions.d-grid.gap-2.mt-3
+          = f.button :submit, "Log in", class:'btn btn-primary py-2 height-48px font-18 fw-bold'
+      = render "devise/shared/links"

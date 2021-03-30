@@ -18,5 +18,19 @@ module Skillup
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    if Rails.env.development? # rails erd gem
+      def eager_load!
+        Zeitwerk::Loader.eager_load_all        
+      end      
+    end
+
+    config.after_initialize do
+      ActionText::ContentHelper.allowed_attributes.add 'style'
+      ActionText::ContentHelper.allowed_attributes.add 'controls'
+
+      ActionText::ContentHelper.allowed_tags.add 'video'
+      ActionText::ContentHelper.allowed_tags.add 'audio'
+      ActionText::ContentHelper.allowed_tags.add 'source'
+    end
   end
 end

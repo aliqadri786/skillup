@@ -1,0 +1,14 @@
+- content_for :title do
+  Update 
+  = @enrollment
+  \|
+  Skill Up
+
+.container
+  %h1 Editing enrollment
+
+  = render 'form'
+
+  = link_to 'Show', @enrollment
+  \|
+  = link_to 'Back', enrollments_path

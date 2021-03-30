@@ -1,0 +1,13 @@
+- content_for :title do
+  New Course
+  \|
+  Skill Up
+
+.container.my-5
+  .card
+    .card-header
+      %h3 Add New course
+    .card-body 
+      = render 'form'
+
+= link_to 'Back', courses_path

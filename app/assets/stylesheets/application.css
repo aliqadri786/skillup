@@ -13,3 +13,259 @@
  *= require_tree .
  *= require_self
  */
+ @import "./actiontext.scss";
+
+
+
+ .custom-conteiner{
+     margin:0 2%;
+ }
+ .btn-info{
+     background-color:#00458B !important;
+     font-weight: 600 !important;
+     border-color: #00458B !important
+ }
+
+ .btn-secondary{
+    background-color:#99DDFF !important;
+    color: #3b3b3b !important;
+    font-weight: 600 !important;
+    border-color: #99DDFF !important
+}
+
+.btn-primary{
+    background-color:#3FD2C7 !important;
+    color: #fff;
+    font-weight: 600 !important;
+    border-color: #3FD2C7 !important
+}
+.t-primary{
+    color:#3FD2C7 !important;
+    margin-left:5px;
+    margin-right:5px
+}
+
+.bread-crumb-chevron{
+    font-size: 10px !important;
+}
+
+.search-field{
+    width: 520px !important;
+    border-radius: 35px !important;
+    height: 48px !important;   
+   overflow: hidden;
+    font-size: 15px !important;
+    color: rgba(3, 3, 3, 0.533) !important;
+    
+   
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.8) !important;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.course-instructor-card{
+    font-size: 12px;
+    color:gray
+}
+.hero-wraper{
+    position:relative
+} 
+.home_image_hero{
+    object-fit: cover;
+    width:100% !important;
+    height: 100%;
+}
+.hero-search-box {
+    position:absolute;
+    top:15%;
+    left:4%;
+    padding:25px;
+    background-color: white;
+    max-width:450px
+}
+
+.hero-input-field{
+    border: 0 !important;
+}
+
+.hero-input-field, .search-field{
+    outline:0px !important; 
+    box-shadow: none !important;
+}
+.no-focus-input{
+    border:none !important
+}
+.hero-input-field:focus, .hero-search-btn:focus, .no-focus-input:focus{
+    outline: none !important;
+    box-shadow:none !important;
+    border-color: transparent !important;
+}
+.hero-search-btn{
+    height:45px;
+    position: relative;
+}
+
+.card-time{
+    left:10px;
+    top:10px
+
+}
+
+.width-30{
+    width:30%;
+    
+}
+
+.text-black{
+    color:black !important
+}
+
+@media only screen and (max-width: 600px) {
+    .search-field{
+        width: 80% !important;
+        border-radius: 20px !important;
+        height: 38px !important;
+        padding: 0px 20px !important;
+        border: 1px solid black !important;
+        font-size: 15px !important;
+        color: rgba(3, 3, 3, 0.533) !important;
+    }
+}
+
+.form-control.is-invalid{background-image: none !important;}
+.form-control.is-valid{background-image: none !important;}
+
+ /* Chrome, Safari, Edge, Opera */
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+ 
+ /* Firefox */
+ input[type=number] {
+   -moz-appearance: textfield;
+ }
+
+ .online-dot{
+     font-size: 10px !important;
+ }
+
+ /* for lessons show page */
+ .black-bg-section{
+    
+   
+    position: absolute;
+    width:100%;    
+    height:400px;
+    background-color: #1c1d1f;
+    
+ }
+ .main-content{
+     position: relative;
+     z-index: 999;
+ }
+ 
+ .content-section{
+    margin-top:8%
+ }
+
+ .badge-bestseller{
+    background-color: #eceb98 !important;
+    color: #3d3c0a !important;
+    border-radius: 4px;
+    display: inline-block !important;
+    padding: .4rem .5rem  !important ;
+    white-space: nowrap   !important;
+ }
+
+ .rating-user-img{
+     height:50px;
+     width:50px;
+     object-fit: cover;
+     border-radius: 50%;
+ }
+
+ .rating-star{
+     color:#e59819;
+     font-size: 14px;
+ }
+ .text-rating{
+    color:#e59819;     
+ }
+ .font-14{
+    font-size: 14px;
+ }
+
+ .font-weight-600{
+     font-weight: 600;
+ }
+ .letter-spacing-1{
+     letter-spacing: 0.06em;
+ }
+
+ .ui-state-highlight{
+     height:3em;
+     line-height: 1.2em;
+     background-color: yellow;
+ }
+
+ .course-detail-img{
+     width:100%;
+     height:180px;
+     object-fit: cover;
+     
+ }
+ .course-detail-smakk-card{
+     padding:1px
+ }
+ .video-preview{
+     position:absolute;
+     top:0;
+     left:0;
+     display:flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+     height:200px;
+     width:100%;
+     background-color: rgba(0, 0, 0, 0.6);
+     
+ }
+ .video-preview-text{
+    position:absolute;
+   margin-top:-5%;
+    display:flex;
+    justify-content: center;
+  
+    width:100%;
+   
+ }
+ .play_circle{
+     border-radius: 50% !important;
+     width:70px;
+     height:70px;
+     display:flex;
+     justify-content: center;
+     align-items: center;
+ }
+ .pointer{
+     cursor: pointer !important;
+ }
+
+ trix-editor.form-control{
+     height:auto
+ }
+
+ .width-100{
+     width:100% !important
+ }
+ .height-48px{
+     height:48px !important
+ }
+ .font-18{
+     font-size: 17px !important;
+ }

@@ -1,0 +1,14 @@
+.container.py-3
+  .h1= @course.title
+
+  %div.h5.py-2.fw-bold.mt-4.text-center.py-2 Enrollments per day, Quantity
+  = bar_chart @course.enrollments.group_by_day(:created_at).count
+
+  %div.h5.py-2.fw-bold.mt-4.text-center.py-2 Enrollments per day, Revenue
+  = bar_chart @course.enrollments.group_by_day(:created_at).sum(:price)
+
+  %div.h5.py-2.fw-bold.mt-4.text-center.py-2 Views (Unique users view the lesson)
+  = bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').count
+
+  %div.h5.py-2.fw-bold.mt-4.text-center.py-2 Views (Unique users view the lesson)
+  = bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').sum(:impressions)

@@ -1,0 +1,4 @@
+= comment.content
+- if policy(comment).destroy?
+  = link_to [@course, @lesson, comment], method: :delete do 
+    .fa.fa-trash

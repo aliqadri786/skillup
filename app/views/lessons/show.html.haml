@@ -1,0 +1,49 @@
+- content_for :title do
+  = @course.title
+  \/
+  = @lesson.title
+  \|
+  Skill Up
+
+.container.my-4
+  .row
+    .col-8
+      .shadow.px-3.py-3.border.rounded
+        .h5.fw-bold.py-2= @lesson.title 
+        - if @lesson.video.attached?
+          %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata" controlslist="nodownload" )
+            %source{src:rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+
+          -# video js library 
+          -# = content_tag :video, id:'my-video' do 
+          -#   = tag :source, src: url_for(@lesson.video), type:"#{@lesson.video.content_type}"
+          - if policy(@lesson).edit?
+            = link_to "Remove video", delete_video_course_lesson_path(@course,@lesson), method: :delete, data: {confirm:"Are you sure"}
+        = @lesson.content
+        %hr
+        .row
+          .col-6
+            - unless @lesson.prev.nil?
+              = link_to "Previous", course_lesson_path(@course,@lesson.prev)        
+          .col-6.d-flex.justify-content-end
+            - unless @lesson.next.nil?
+              = link_to "Next", course_lesson_path(@course,@lesson.next)
+        %hr
+        - @comments.each do |comment|
+          = render "lessons/comments/comment", comment: comment
+        .row 
+          = render "lessons/comments/form"
+    .col-4
+      - @lessons.each do |lesson|
+        = render "lessons/lesson_preview", lesson: lesson
+
+
+-# = link_to 'Edit', edit_course_lesson_path(@course,@lesson)
+
+-# - if @lesson.viewed(current_user) == true
+-#     Viewed 
+-#   - else
+-#     Not Viewed
+
+
+

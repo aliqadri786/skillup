@@ -30,3 +30,22 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "haml-rails", "~> 2.0"
+gem 'font-awesome-sass', '~> 5.15.1'
+gem 'simple_form'
+gem 'faker'
+gem 'devise'
+gem 'friendly_id', '~> 5.4.0'
+gem 'ransack'
+gem 'public_activity', github: 'chaps-io/public_activity', branch: 'master'
+gem "rolify"
+gem "pundit"
+gem 'exception_notification'
+gem 'pagy'
+gem "chartkick"
+gem 'groupdate'
+gem 'rails-erd', group: :development
+gem 'ranked-model'
+gem 'active_storage_validations'
+gem "image_processing"
+gem 'mini_magick', '>= 4.9.5'
+# gem 'omniauth-google-oauth2', '~> 1.0'

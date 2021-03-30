@@ -1,0 +1,31 @@
+- content_for :title do
+  All Users
+  \|
+  Skill Up
+.custom-conteiner
+
+  = search_form_for @q do |f|   
+    =f.search_field :email_cont  
+    =f.search_field :sign_in_count_eq  
+    =f.search_field :email_or_sign_in_count_eq  
+    =f.submit
+
+  = link_to users_path, class:"btn btn-secondary btn-sm" do
+    .fa.fa-sync
+
+  .row.custom-container
+    - @users.each do |user|
+      = render "users/user", user:user
+
+  %table.table.table.bordered
+    %tr 
+      %th Id
+      %th= sort_link(@q, :email)
+      %th Created at
+      %th sign in count
+    - @users.each do |user|
+      %td= user.id
+      %td= user.email
+      %td= user.created_at
+      %td= user.sign_in_count
+     

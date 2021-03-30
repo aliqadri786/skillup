@@ -1,0 +1,31 @@
+.container.px-4.py-4.bg-white
+  %h1 Listing enrollments
+
+  %table.table.table-border
+    %thead
+      %tr
+        %th Course
+        %th User
+        %th Price
+        %th Rating
+        %th Review
+        %th 
+        %th 
+        
+
+    %tbody
+      - @enrollments.each do |enrollment|
+        %tr
+          %td= enrollment.course
+          %td= enrollment.user
+          %td= enrollment.price
+          %td= enrollment.rating
+          %td= enrollment.review          
+          %td
+            - if policy(enrollment).edit?
+              = link_to 'Post Review', edit_enrollment_path(enrollment)
+          %td= link_to 'Delete Enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
+
+  %br
+
+  = link_to 'New Enrollment', new_enrollment_path

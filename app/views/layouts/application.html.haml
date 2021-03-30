@@ -2,11 +2,20 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Skillup
+    %meta{description: "Online learning and skill sharing platform"}/
+    %meta{keywords: "online, course, videos,video tutorials, skillshare, udemy, pluralsight"}/
+    %meta{author: "Ali Qadri"}/
+    %title 
+      = content_for?(:title) ? yield(:title) : "Online Courses - Learn Anything | Skill Up"
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+  %body.bg-white
+    = render "layouts/navbar"   
+    = render "layouts/messages"
     = yield
+
+    = render "layouts/footer"
+

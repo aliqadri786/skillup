@@ -1,0 +1,66 @@
+.border-top.mt-5.px-3.bg-white
+  %footer.custom-conteiner.py-4
+    .row
+      .col-6.col-md
+        %h5 Features
+        %ul.list-unstyled.text-small
+          %li
+            %a.link-secondary{:href => "#"} Cool stuff
+          %li
+            %a.link-secondary{:href => "#"} Random feature
+          %li
+            %a.link-secondary{:href => "#"} Team feature
+          %li
+            %a.link-secondary{:href => "#"} Stuff for developers
+          %li
+            %a.link-secondary{:href => "#"} Another one
+          %li
+            %a.link-secondary{:href => "#"} Last time
+      .col-6.col-md
+        %h5 Resources
+        %ul.list-unstyled.text-small
+          %li
+            %a.link-secondary{:href => "#"} Resource name
+          %li
+            %a.link-secondary{:href => "#"} Resource
+          %li
+            %a.link-secondary{:href => "#"} Another resource
+          %li
+            %a.link-secondary{:href => "#"} Final resource
+      .col-6.col-md
+        %h5 Resources
+        %ul.list-unstyled.text-small
+          %li
+            %a.link-secondary{:href => "#"} Business
+          %li
+            %a.link-secondary{:href => "#"} Education
+          %li
+            %a.link-secondary{:href => "#"} Government
+          %li
+            %a.link-secondary{:href => "#"} Gaming
+      .col-6.col-md
+        %h5 About
+        %ul.list-unstyled.text-small
+          %li
+            %a.link-secondary{:href => "#"} Team
+          %li
+            %a.link-secondary{:href => "#"} Locations
+          %li
+            %a.link-secondary{:href => "#"} Privacy
+          %li
+            %a.link-secondary{:href => "#"} Terms
+
+      .col-12.col-md
+        %svg.d-block.mb-2{:fill => "none", :height => "24", :role => "img", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+          %title Product
+          %circle{:cx => "12", :cy => "12", :r => "10"}
+          %path{:d => "M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"}
+        %small.d-block.mb-3.text-muted 
+  
+  %footer.custom-conteiner.py-3
+    %p.float-end
+      %small.text-muted &copy;
+      %small.text-muted= Date.current.year
+      %small.text-muted Skill Up
+    %p      
+      = link_to "Skill Up", root_path, class:"fw-bolder h4 text-decoration-none text-dark"

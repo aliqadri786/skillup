@@ -1,0 +1,111 @@
+- content_for :title do
+  = @course.title
+  \|
+  Skill Up
+  
+  
+.black-bg-section
+.container.main-content    
+  .row 
+    .col-8.py-3.text-white.mt-1.pe-2
+      %span.fw-bold.py-2= link_to "Courses", courses_path, class:"t-primary text-decoration-none"
+      %small.bread-crumb-chevron.fa.fa-chevron-right 
+      %span.fw-bold.py-2.t-primary= @course.title  
+      
+      .h2.fw-bolder.mt-3= @course.title 
+      .h5.py-1= @course.short_description
+      %div.my-3.badge.badge-bestseller Bestseller 
+      %small.fw-bold.text-warning.ms-2 4.5
+      - 5.times do |i|
+        %small.fa.fa-star.rating-star 
+      
+      %small (142,854 ratings) 754,528 students 
+      %div.py-1
+        %small Created by 
+        = @course.user.username 
+      %div.py-2
+        %small.fa.fa-clock.text-white
+        %small.ms-1 Last Updated 
+        = @course.updated_at.strftime("%m/%Y") 
+
+        %small.fa.fa-globe.text-white.ms-4
+        %small.ms-1= @course.language
+
+        %small.fa.fa-signal.text-white.ms-4
+        %small.ms-1= @course.level
+        %div.py-3
+          %button.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Whishlist
+          %button.ms-2.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Share
+          %button.ms-2.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Gift this course
+      .content-section
+        = link_to "Add Lesson", new_course_lesson_path(@course, @lesson), class:"btn btn-primary px-2 py-2 my-3"
+        %ul.list-group.lesson_sortable
+          - @lessons.each do |lesson|
+            = content_tag "div", id:"lesson-#{lesson.id}", data:{ model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course,lesson)} do
+              %li.list-group-item
+                = render "lessons/lesson_preview", lesson:lesson
+        
+        .btt.btn-warning.btn-sm= review_button(@course)
+
+        .text-dark
+          - @course.enrollments.each do |enrollment| 
+            - if enrollment.rating.present?
+              = render "enrollments/enrollment", enrollment:enrollment
+    .col-4.px-3
+      .shadow.rounded.mt-5.bg-white.course-detail-smakk-card
+        - if  @course.avatar.attached?
+          .position-relative.pointer
+            = image_tag @course.avatar, class:"course-detail-img"
+            %div.video-preview.text-center
+              .fa.fa-play-circle.fa-4x.text-white
+             
+            %div.video-preview-text.fw-bold.text-white Preview this course
+        .py-5.container
+          .fw-bolder.h3= number_to_currency(@course.price)
+          .d-grid.gap-2.mt-3
+            = enrollment_button(@course)
+          .fw-bold.mt-3 
+            This course includes: 
+          .py-1
+            %small.fa.fa-play.text-muted
+            %small.ms-3 4 hours on-demand video
+          .py-1
+            %small.fa.fa-file.text-muted
+            %small.ms-3 75 articles
+          .py-1
+            %small.fa.fa-file.text-muted
+            %small.ms-3 75 articles
+          .py-1
+            %small.fa.fa-infinity.text-muted
+            %small.ms-3 Full lifetime access
+          .py-1
+            %small.fa.fa-award.text-muted
+            %small.ms-3 Certificate of completion
+           
+
+
+
+
+-# %ul.sortable
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 1
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 2
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 3
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 4
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 5
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 6
+-#   %li.ui-state-default
+-#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
+-#     Item 7
+      

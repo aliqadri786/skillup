@@ -1,0 +1,32 @@
+- content_for :title do
+  Acticity List
+  \|
+  Skill Up
+
+.container.mt-5
+  .h4.fw-bolder Activity List
+.container.my-2
+  - @activities.each do |activity|
+    .row
+      .d-flex.shadow.px-3.py-3.mb-2.bg-white        
+        .ms-2= activity.trackable_type
+        -# .ms-2= activity.trackable_id
+        - if activity.trackable_type == "Lesson"
+          - if Lesson.where(id: activity.trackable_id).present?
+            .ms-2= link_to activity.trackable, course_lesson_path(activity.trackable.course,activity.trackable)
+        - elsif activity.trackable_type == "Comment"
+          - if Comment.where(id: activity.trackable_id).present?
+            .ms-2= link_to activity.trackable, course_lesson_path(activity.trackable.lesson.course,activity.trackable.lesson)
+        - else
+          .ms-2= link_to activity.trackable, activity.trackable
+        -# .ms-2= activity.key  
+        .ms-2= crud_label(activity.key.match(/\.(.*)/)[1])  
+
+        .ms-2 by    
+        .ms-2= link_to activity.owner, activity.owner
+        - if activity.parameters.any?
+          .ms-2= activity.parameters
+        %small.text-muted.ms-4= "#{activity.created_at.strftime("%d/%m/%y %H:%m")} (#{time_ago_in_words(activity.created_at)})"
+        
+  .d-flex.justify-content-center.pt-4
+    != pagy_bootstrap_nav(@pagy)

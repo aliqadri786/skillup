@@ -1,0 +1,18 @@
+.row.py-3.border-bottom
+  .col-1 
+    %img.rating-user-img{:alt => "skillup", :src => "https://www.w3schools.com/w3images/team2.jpg"}
+  .col-11
+    .ps-4
+      .row 
+        .col-11.fw-bold= enrollment.user.username
+        .col-1.text-right.fa.fa-pencil-alt
+      %div
+        - 5.times do |r|
+          - if enrollment.rating.present? && enrollment.rating < r+1
+            .fa.fa-star.text-muted  
+          - else
+            .fa.fa-star.rating-star        
+        %small.text-muted.ms-2= time_ago_in_words(enrollment.updated_at) 
+        %small.text-muted ago
+      %div.py-2
+        %small= enrollment.review

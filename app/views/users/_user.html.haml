@@ -1,0 +1,51 @@
+.col-sm-6.col-md-3.col-lg-3.mb-3  
+  .card.h-100.shadow
+    .card-body
+      %h5.card-title.fw-bold.h6 
+        = link_to user.email, user_path(user), class:"text-decoration-none text-dark"
+        %div.online-dot.mt-2
+          - if user.online?
+            .fa.fa-circle.text-success
+            Online
+          - else 
+            .fa.fa-circle.text-danger
+            = time_ago_in_words(user.updated_at)
+            ago
+    .card-footer
+      %small.text-muted 
+        Sign up: 
+        = time_ago_in_words(user.created_at)
+        ago
+        .row        
+        = 'sign_in_count'.humanize
+        = user.sign_in_count
+
+        .row        
+        = 'current_sign_in_at'.humanize
+        = time_ago_in_words(user.current_sign_in_at) if user.current_sign_in_at?
+
+        .row        
+        = 'last_sign_in_at'.humanize
+        = time_ago_in_words(user.last_sign_in_at) if user.last_sign_in_at?
+
+        .row        
+        = 'current_sign_in_ip'.humanize
+        = user.current_sign_in_ip
+
+        .row        
+        = 'last_sign_in_ip'.humanize
+        = user.last_sign_in_ip
+    .card-footer
+      %small.text-muted 
+        %b Email Confirmed: 
+        -if user.confirmed_at.present? 
+          .badge.rounded-pill.bg-success YES 
+        - else
+          .badge.rounded-pill.bg-danger NO 
+    .card-footer
+      %small.text-muted.fw-bold Roles:
+      %small.text-muted 
+        - user.roles.each do |role|
+          .badge.bg-primary
+            = role.name.humanize
+      = link_to "Edit Roles", edit_user_path(user) if policy(user).edit?

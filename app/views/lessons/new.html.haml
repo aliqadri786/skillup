@@ -1,0 +1,12 @@
+- content_for :title do
+  = @course.title
+  \/
+  New Lesson
+  \|
+  Skill Up
+
+%h1 New lesson
+
+= render 'form'
+
+= link_to 'Back', course_lessons_path

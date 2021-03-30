@@ -1,0 +1,12 @@
+.card.text-dark.shadow-sm
+  .card-header 
+    = link_to lesson.title, course_lesson_path(@course,lesson) , class:"text-decoration-none text-dark"
+  .card-body 
+    - if policy(lesson).show?
+      = lesson.content 
+    -else 
+      .fa.fa-lock.text-muted
+  - if policy(lesson).edit?
+    .card-footer     
+      = link_to 'Edit', edit_course_lesson_path(@course,lesson) if policy(lesson).edit?
+      = link_to 'Destroy', [@course,lesson], method: :delete, data: { confirm: 'Are you sure?' }  if policy(lesson).edit?

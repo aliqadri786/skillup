@@ -1,0 +1,44 @@
+- content_for :title do
+  = "#{action_name.humanize} Courses" 
+  \|
+  Skill Up
+
+.custom-conteiner.mt-3
+  -if @courses.empty?
+    %h4.fw-bold Sorry, we couldn't find any results
+    %h5.fw-bold.mt-4 Try adjusting your search. Here are some ideas:
+    %ul.py-3
+      %li Make sure all words are spelled correctly
+      %li Try different search terms
+      %li Try more general search terms
+  - else
+    %div.h4.fw-bold= action_name.humanize
+    .row
+      .col-2 
+        = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|   
+          =f.search_field :title_cont, class:"form-control", placeholder:"Title" 
+          -# =f.select :language_cont, Course.languages , include_blank:true    
+          =f.select :level_cont, Course.levels, include_blank:true 
+          -# =f.collection_check_boxes :level_cont, Course.levels, :level_cont, :level_cont
+          =f.select :language_cont, Course.languages, include_blank:true               
+          =f.search_field :user_email_cont, class:"form-control", placeholder:"User"
+          = sort_link(@ransack_courses, :price) 
+          = sort_link(@ransack_courses, :average_rating, "Top Rated") 
+          = sort_link(@ransack_courses, :created_at, "Latest") 
+          = sort_link(@ransack_courses, :enrollments_count, "Popular") 
+          
+          =f.submit
+        = link_to "Refresh", @ransack_path
+      .col-10
+        .row 
+          
+          - @courses.each do |course|
+            = render "courses/course", course:course
+  .d-flex.justify-content-center.pt-4
+    != pagy_bootstrap_nav(@pagy)
+ 
+
+
+
+
+
