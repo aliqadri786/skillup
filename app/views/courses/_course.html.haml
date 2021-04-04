@@ -7,8 +7,15 @@
         %h5.card-title.fw-bold.h6 
           = course.title
         .course-instructor-card
-          = course.user.username
+          .fa.fa-user.text-muted
+          %span.ms-2= course.user.username
         %span.fw-bold.text-rating.font-14= course.average_rating
+        %span.ms-2
+          - 5.times do |r|
+            - if course.average_rating.present? && course.average_rating < r+1
+              .fa.fa-star.text-muted  
+            - else
+              .fa.fa-star.rating-star   
         %small.text-muted= "(#{course.enrollments_count})"
         .font-weight-600.mt-1.letter-spacing-1= number_to_currency(course.price)
     -# - if policy(course).update?

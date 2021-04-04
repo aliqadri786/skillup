@@ -9,8 +9,9 @@
             = enrollment.user.username
 
         .w-50per.text-end
-          = link_to edit_course_enrollment_path(@course,enrollment) do 
-            .fa.fa-pencil-alt
+          - if policy(enrollment).edit?
+            = link_to edit_course_enrollment_path(@course,enrollment) do 
+              .fa.fa-pencil-alt
       %div
         - 5.times do |r|
           - if enrollment.rating.present? && enrollment.rating < r+1

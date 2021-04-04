@@ -1,24 +1,72 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a platform for online learning and teaching. 
 
-Things you may want to cover:
+MODULES:
+1. Authentication System using devise, rollify, pundit.
+2. Student Learning Module
+3. Teachers Module
+4. Admin Module
+5. Online Payment using stripe
 
-* Ruby version
 
-* System dependencies
+Students can: 
 
-* Configuration
+Enroll to free courses
+Buy free courses
+Rate Course
+Watch Lessons
+Comment on Lessons
+Get certificate of completion when course is completed
 
-* Database creation
+Teachers can:
 
-* Database initialization
+Create Courses
+Track his students
+See course revenues and other stats 
 
-* How to run the test suite
+Admin can:
 
-* Services (job queues, cache servers, search engines, etc.)
+All above functioalities
+Manage Users
+Tracks App Activity 
+Sees Analytics
 
-* Deployment instructions
 
-* ...
+Following gems are used:
+
+* haml-rails
+
+* font-awesome-sass
+
+* simple_form
+
+* faker
+
+* devise
+
+* friendly_id
+
+* ransack
+
+* public_activity
+
+* rolify
+
+* pundit
+
+* exception_notification
+
+* pagy
+
+* chartkick
+
+* ranked-model
+
+* wicked_pdf
+
+* wicked # multistep forms
+
+* cocoon # edit child forms in parent form
+
+* stripe

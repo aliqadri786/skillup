@@ -1,25 +1,38 @@
-%div{:style=>"border:10px solid black;widtg:800px;height:600px;padding:20px;text-align:center"}
-  %div{:style=>"border:5px solid black;widtg:750px;height:550px;padding:20px;text-align:center"}
+%div{:style=>"border:10px solid black;widtg:800px;height:600px;padding:20px;"}
+  %div{:style=>"border:5px solid black;widtg:750px;height:550px;padding:20px;letter-spacing:4px;font-family:calibri;"}
+    
     %center
-      Certificate of Completion
+      %h1{:style=>"font-weight:900;"} Certificate of Completion
 
-    %p
-    %center
+      %p
+      
       This is to certify that owner of the email address
+      %p
+      %p
       %b= @enrollment.user.email
+      %p
+      %p
       has successfully completed the course
+      %p
+      %p
       %b= @enrollment.course.title
+      %p
+      %p
       on Skill Up platform
 
-    %p
-    %b Certificate id: 
-    = @enrollment.slug
+      %p
+      %b Certificate id: 
+      = @enrollment.slug
 
-    %p
-    %b Certificate url: 
-    = request.base_url+request.original_fullpath
+      %p
+      %b Certificate url: 
+      = request.base_url+request.original_fullpath
 
-    -# %center
-    -#   %h3= image_tag wicked_pdf_asset_base64('mysite.jpg'), height:'30', width:'auto'
-    -#   %p www.skillup.com
+      -# %div{:style=>"margin-top:150px"} 
+      -#   %img.home_image_hero{:alt => "skillup", :src => "/assets/home_banner.jpg"}
+      
+
+    
+      %h3= image_tag wicked_pdf_asset_base64('certificate_badge.jpg'), height:'50', width:'auto'
+      %p www.skillup.com
 

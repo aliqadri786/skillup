@@ -10,8 +10,12 @@
   
   %small.fw-bold.text-warning
     = @course.average_rating
-    - 5.times do |i|
-      %small.fa.fa-star.rating-star.ms-1     
+    %span.ms-2
+      - 5.times do |r|
+        - if @course.average_rating.present? && @course.average_rating < r+1
+          .fa.fa-star.text-muted  
+        - else
+          .fa.fa-star.rating-star     
     
   %small.ms-2= pluralize(number_with_delimiter(@course.enrollments_count), "student")
 
@@ -27,13 +31,17 @@
         .h5.py-1= truncate(@course.short_description, :length => 150)  
         %div.my-3.badge.badge-bestseller Bestseller 
         %small.fw-bold.text-warning.ms-2= @course.average_rating
-        - 5.times do |i|
-          %small.fa.fa-star.rating-star 
+        %span.ms-2
+          - 5.times do |r|
+            - if @course.average_rating.present? && @course.average_rating < r+1
+              .fa.fa-star.text-muted  
+            - else
+              .fa.fa-star.rating-star
         
         %small= pluralize(number_with_delimiter(@course.enrollments_count), "student")
         %div.py-1
           %small Created by 
-          = @course.user.username 
+          = link_to @course.user.username, user_path(@course.user), class:"text-decoration-none text-info" 
         %div.py-2
           %small.fa.fa-clock.text-white
           %small.ms-1 Last Updated 
@@ -81,8 +89,10 @@
           .col-6 
             %span.fw-bold.text-dark= pluralize(@course.lessons_count, "lecture")
           .col-6.text-end
-            %span.text-dark.pt-5 Progress
-            %span.fw-bold.text-dark= number_to_percentage(@course.progress(current_user), precision:0)
+            - if current_user.present?
+              - if @course.bought(current_user)
+                %span.text-dark.pt-5 Progress
+                %span.fw-bold.text-dark= number_to_percentage(@course.progress(current_user), precision:0)
             
        
           %ul.lesson_sortable.lessons-show       
