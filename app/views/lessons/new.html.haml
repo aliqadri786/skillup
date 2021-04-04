@@ -5,8 +5,14 @@
   \|
   Skill Up
 
-%h1 New lesson
 
-= render 'form'
-
-= link_to 'Back', course_lessons_path
+.container.py-3
+  = link_to  course_path(@course), class:"btn btn-dark btn-sm mb-3" do 
+    .fa.fa-arrow-left 
+    Back to course
+  .card
+    .card-header
+      %span.h4 Add New Lesson to 
+      %span.h5.ms-2= @course.title
+    .card-body 
+      = render 'form'

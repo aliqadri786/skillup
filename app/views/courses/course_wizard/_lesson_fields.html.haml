@@ -1,0 +1,7 @@
+.nested-fields   
+  = f.input :title
+  = f.input :content, as: :rich_text_area  
+  .d-flex 
+    .my-3= f.input :video
+    .my-3= f.input :video_thumbnail
+  = link_to_remove_association "Remove Lesson", f, class:"btn btn-danger btn-sm"

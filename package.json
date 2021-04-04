@@ -12,6 +12,7 @@
     "bootstrap": "^5.0.0-beta2",
     "chart.js": "^2.9.4",
     "chartkick": "^3.2.1",
+    "cocoon-js": "^0.0.5",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",

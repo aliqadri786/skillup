@@ -1,0 +1,8 @@
+= render layout: 'courses/course_wizard/step' do 
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :level, collection:Course.levels
+    = f.input :price, min:0
+    = f.input :published
+    = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class:"selectize" }
+    = f.input :description, as: :rich_text_area
+    .mt-2.text-end= f.button :submit, "Save and continue"

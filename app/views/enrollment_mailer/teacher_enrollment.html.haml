@@ -1,0 +1,15 @@
+You have a new student in course
+= link_to @enrollment.course, @enrollment.course
+
+.row 
+Enrollment Id
+= @enrollment.slug
+
+.row 
+Course Price 
+= @enrollment.course.price
+
+.row 
+Regards
+.row 
+= link_to "Skill Up Team", root_url

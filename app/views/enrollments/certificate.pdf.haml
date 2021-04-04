@@ -1,0 +1,25 @@
+%div{:style=>"border:10px solid black;widtg:800px;height:600px;padding:20px;text-align:center"}
+  %div{:style=>"border:5px solid black;widtg:750px;height:550px;padding:20px;text-align:center"}
+    %center
+      Certificate of Completion
+
+    %p
+    %center
+      This is to certify that owner of the email address
+      %b= @enrollment.user.email
+      has successfully completed the course
+      %b= @enrollment.course.title
+      on Skill Up platform
+
+    %p
+    %b Certificate id: 
+    = @enrollment.slug
+
+    %p
+    %b Certificate url: 
+    = request.base_url+request.original_fullpath
+
+    -# %center
+    -#   %h3= image_tag wicked_pdf_asset_base64('mysite.jpg'), height:'30', width:'auto'
+    -#   %p www.skillup.com
+

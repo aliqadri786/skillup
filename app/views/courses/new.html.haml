@@ -3,11 +3,14 @@
   \|
   Skill Up
 
-.container.my-5
+.container.py-3
+  = link_to  courses_path, class:"btn btn-dark btn-sm mb-3" do 
+    .fa.fa-arrow-left 
+    Back to courses
   .card
     .card-header
-      %h3 Add New course
+      %h4 Add New course
     .card-body 
       = render 'form'
 
-= link_to 'Back', courses_path
+ 

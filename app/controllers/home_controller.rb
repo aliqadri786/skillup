@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+
   def index
-    @courses = Course.published.approved.limit(4)
+    @courses = Course.published.approved.order(rating: :desc).limit(4)
+    @tags = Tag.all.where.not(course_tags_count:0).order(course_tags_count: :desc).limit(10)
   end
 
   def activity

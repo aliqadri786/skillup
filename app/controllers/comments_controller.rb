@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       @comment.lesson_id = @lesson.id
 
       if @comment.save
-        redirect_to course_lesson_path(@course,@lesson), notice: "Comment was successfully created."        
+        redirect_to course_lesson_path(@course,@lesson), notice: "Comment was successfully posted."        
       else
         redirect_to course_lesson_path(@course,@lesson), alert: "Something missing"
       end
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
       authorize @comment
       @comment.destroy
       respond_to do |format|
-        format.html { redirect_to course_lesson_path(@course,@lesson), notice: "Comment was successfully destroyed." }
+        format.html { redirect_to course_lesson_path(@course,@lesson), notice: "Comment was successfully deleted." }
         format.json { head :no_content }
       end
     end

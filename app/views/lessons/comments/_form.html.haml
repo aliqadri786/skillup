@@ -2,5 +2,5 @@
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
  
-  = f.input :content
-  = f.button :submit
+  = f.input :content, label:false
+  .mt-2.text-end= f.button :submit, "Post Comment"

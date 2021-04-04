@@ -5,54 +5,114 @@
   
   
 .black-bg-section
+.course-intro-section.px-4.py-2.text-white 
+  .fw-bolder= @course.title 
+  
+  %small.fw-bold.text-warning
+    = @course.average_rating
+    - 5.times do |i|
+      %small.fa.fa-star.rating-star.ms-1     
+    
+  %small.ms-2= pluralize(number_with_delimiter(@course.enrollments_count), "student")
+
 .container.main-content    
   .row 
-    .col-8.py-3.text-white.mt-1.pe-2
-      %span.fw-bold.py-2= link_to "Courses", courses_path, class:"t-primary text-decoration-none"
-      %small.bread-crumb-chevron.fa.fa-chevron-right 
-      %span.fw-bold.py-2.t-primary= @course.title  
-      
-      .h2.fw-bolder.mt-3= @course.title 
-      .h5.py-1= @course.short_description
-      %div.my-3.badge.badge-bestseller Bestseller 
-      %small.fw-bold.text-warning.ms-2 4.5
-      - 5.times do |i|
-        %small.fa.fa-star.rating-star 
-      
-      %small (142,854 ratings) 754,528 students 
-      %div.py-1
-        %small Created by 
-        = @course.user.username 
-      %div.py-2
-        %small.fa.fa-clock.text-white
-        %small.ms-1 Last Updated 
-        = @course.updated_at.strftime("%m/%Y") 
-
-        %small.fa.fa-globe.text-white.ms-4
-        %small.ms-1= @course.language
-
-        %small.fa.fa-signal.text-white.ms-4
-        %small.ms-1= @course.level
-        %div.py-3
-          %button.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Whishlist
-          %button.ms-2.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Share
-          %button.ms-2.btn.btn-outline-transparent.text-white.border-white.py-2.px-3{:type => "button"} Gift this course
-      .content-section
-        = link_to "Add Lesson", new_course_lesson_path(@course, @lesson), class:"btn btn-primary px-2 py-2 my-3"
-        %ul.list-group.lesson_sortable
-          - @lessons.each do |lesson|
-            = content_tag "div", id:"lesson-#{lesson.id}", data:{ model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course,lesson)} do
-              %li.list-group-item
-                = render "lessons/lesson_preview", lesson:lesson
+    .col-8.py-3.pe-2
+      .text-white
+        %span.fw-bold.py-2= link_to "Courses", courses_path, class:"t-primary text-decoration-none"
+        %small.bread-crumb-chevron.fa.fa-chevron-right 
+        %span.fw-bold.py-2.t-primary= @course.title  
         
-        .btt.btn-warning.btn-sm= review_button(@course)
+        .h2.fw-bolder.mt-3= truncate(@course.title, :length => 45)
+        .h5.py-1= truncate(@course.short_description, :length => 150)  
+        %div.my-3.badge.badge-bestseller Bestseller 
+        %small.fw-bold.text-warning.ms-2= @course.average_rating
+        - 5.times do |i|
+          %small.fa.fa-star.rating-star 
+        
+        %small= pluralize(number_with_delimiter(@course.enrollments_count), "student")
+        %div.py-1
+          %small Created by 
+          = @course.user.username 
+        %div.py-2
+          %small.fa.fa-clock.text-white
+          %small.ms-1 Last Updated 
+          = @course.updated_at.strftime("%m/%Y") 
 
-        .text-dark
+          %small.fa.fa-globe.text-white.ms-4
+          %small.ms-1= @course.language
+
+          %small.fa.fa-signal.text-white.ms-4
+          %small.ms-1= @course.level
+          %div.py-3.mt-3
+            - if policy(@course).update?
+              = link_to course_course_wizard_index_path(@course), class:"btn btn-outline-primary border-white py-2 px-3" do 
+                .fa.fa-pencil-alt
+                %span.ms-1 Edit
+
+            - if policy(@course).destroy?
+              = link_to @course, method: :delete, data: { confirm:'Are you sure?' }, class:"btn  btn-outline-danger border-white ms-2 py-2 px-3" do 
+                .fa.fa-trash
+                %span.ms-1 Delete         
+            
+
+            - if policy(@course).owner?
+              = link_to  new_course_lesson_path(@course, @lesson), class:"btn btn-outline-success border-white px-3 my-3 ms-2 py-2" do 
+                .fa.fa-plus
+                %span.ms-1 Add New Lesson
+            
+
+            - if policy(@course).approve?
+              - if !@course.approved?
+                = link_to approve_course_path(@course), method: :patch, data: { confirm:'Are you sure?' }, class:"btn  btn-outline-success border-white ms-2 py-2 px-3" do
+                  .fa.fa-check
+                  %span.ms-1 Approve
+
+            - if @course.approved?
+              = link_to unapprove_course_path(@course), method: :patch, data: { confirm:'Are you sure?' }, class:"btn  btn-outline-danger border-white ms-2 py-2 px-3" do
+                .fa.fa-times
+                %span.ms-1 Unapprove
+              
+          
+      .content-section    
+        .row.mb-1  
+          .fw-bolder.h4.text-dark Course content      
+        .row.py-2 
+          .col-6 
+            %span.fw-bold.text-dark= pluralize(@course.lessons_count, "lecture")
+          .col-6.text-end
+            %span.text-dark.pt-5 Progress
+            %span.fw-bold.text-dark= number_to_percentage(@course.progress(current_user), precision:0)
+            
+       
+          %ul.lesson_sortable.lessons-show       
+            - @lessons.each do |lesson|
+              = content_tag "div", id:"lesson-#{lesson.id}", data:{ model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course,lesson)} do
+                %li
+                  = render "lessons/lesson_preview", lesson:lesson
+        
+       
+       
+        .row.text-dark.mt-5
+          .h5.fw-bolder Description
+          = @course.description
+        %hr  
+
+        .text-dark.mt-5
+          .h5.fw-bolder Student feedback 
           - @course.enrollments.each do |enrollment| 
             - if enrollment.rating.present?
               = render "enrollments/enrollment", enrollment:enrollment
+
+        .row.mt-4.text-dark 
+          .h4.fw-bolder.py-2 Students also bought
+          - Course.all.where.not(id: @course.id).each do |course|
+            - unless @course.tags.pluck(:id).intersection(course.tags.pluck(:id)).count.zero?
+              = render "courses/course", course:course
+
+
     .col-4.px-3
-      .shadow.rounded.mt-5.bg-white.course-detail-smakk-card
+      .shadow.rounded.mt-5.bg-white.course-detail-smakk-card.sticky-top-gap
         - if  @course.avatar.attached?
           .position-relative.pointer
             = image_tag @course.avatar, class:"course-detail-img"
@@ -63,18 +123,23 @@
         .py-5.container
           .fw-bolder.h3= number_to_currency(@course.price)
           .d-grid.gap-2.mt-3
-            = enrollment_button(@course)
+            
+            = enrollment_button(@course)    
+            - if @course.progress(current_user) == 100
+              = certificate_button(@course)  
+            -if @course.enrollments.any? && @course.enrollments.where(user: current_user).first.present?
+              - if policy(@course.enrollments.where(user: current_user).first).edit?
+                = review_button(@course)     
+              
           .fw-bold.mt-3 
             This course includes: 
-          .py-1
-            %small.fa.fa-play.text-muted
-            %small.ms-3 4 hours on-demand video
+          
           .py-1
             %small.fa.fa-file.text-muted
-            %small.ms-3 75 articles
+            %small.ms-3=  pluralize(@course.lessons_count,"lectures")
           .py-1
             %small.fa.fa-file.text-muted
-            %small.ms-3 75 articles
+            %small.ms-3=  pluralize(@course.lessons_count,"articles")
           .py-1
             %small.fa.fa-infinity.text-muted
             %small.ms-3 Full lifetime access
@@ -84,28 +149,4 @@
            
 
 
-
-
--# %ul.sortable
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 1
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 2
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 3
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 4
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 5
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 6
--#   %li.ui-state-default
--#     %span.ui-icon.ui-icon-arrowthick-2-n-s>
--#     Item 7
       

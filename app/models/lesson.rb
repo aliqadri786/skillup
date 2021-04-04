@@ -5,7 +5,7 @@ class Lesson < ApplicationRecord
   include RankedModel
   ranks :row_order, with_same: :course_id
   
-  validates :title, :content, :course, presence: true
+  validates :title, :course, presence: true
   validates :title, length:{maximum:70}
   validates_uniqueness_of :title, scope: :course_id
 

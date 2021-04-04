@@ -45,9 +45,12 @@ require("selectize")
 
 import '../trix-editor-override'
 
-import videojs from 'video.js'
-import 'video.js/dist/video-js.css'
 
+
+// import videojs from 'video.js'
+// import 'video.js/dist/video-js.css'
+
+require("./src/cocoon")
 
 $( function() {
     $( ".sortable" ).sortable();
@@ -81,10 +84,17 @@ $(document).on('turbolinks:load', function(){
         return false;
     });
 
-    if($('.selectize')){
+    // if($('.selectize')){
         $('.selectize').selectize({
-            sortField: 'text'
+            create: function(input, callback){
+                $.post('/tags.json',{tag: {name:input}})
+                    .done(function(response){
+                        console.log(response)
+                        callback({value:response.id, text:response.name});
+                    });
+            }
+            // sortField: 'text'
         });
-    }
+    // }
     
 });

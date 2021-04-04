@@ -5,19 +5,20 @@
 
   .form-inputs
     = f.input :title, input_html: { autocomplete: 'off' }
-    - if @lesson.video.attached?
-      = @lesson.video.filename
-    = f.input :video
-    - if @lesson.video_thumbnail.attached?
-      = @lesson.video_thumbnail.filename
-      -# = image_tag @lesson.video_thumbnail, width:'200px'
-    = f.input :video_thumbnail
+    .d-flex.py-3
+      - if @lesson.video.attached?
+        = @lesson.video.filename
+      = f.input :video
+      - if @lesson.video_thumbnail.attached?
+        = @lesson.video_thumbnail.filename
+        -# = image_tag @lesson.video_thumbnail, width:'200px'
+      = f.input :video_thumbnail
 
     -# = f.rich_text_area :content
     -# %small= f.error :content, class:"text-danger"
-     = f.input :content, as: :rich_text_area
+    = f.input :content, as: :rich_text_area
     -# = f.association :course
     -# = f.input :course_id, input_html: { value: @lesson.course_id || params[:course_id] }, as: :hidden
 
-  .form-actions
-    = f.button :submit
+  .form-actions.text-end.mt-2
+    = f.button :submit, "Save Lesson"

@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  before_action :set_enrollment, only: %i[ show edit update destroy certificate ]
   before_action :set_course, only: %i[ new create ]
 
   # GET /enrollments or /enrollments.json
@@ -8,6 +8,17 @@ class EnrollmentsController < ApplicationController
     authorize @enrollments
   end
 
+  def certificate
+    authorize @enrollment, :certificate?
+    respond_to do |format|
+      format.html
+      format.pdf do
+          render pdf: "#{@enrollment.course.title}, #{@enrollment.user.email}",         
+          template: 'enrollments/certificate.pdf.haml'          
+      end 
+    end 
+  end
+  
   def my_students
     @enrollments=Enrollment.joins(:course).where(course: {user: current_user})    
     render "index"
@@ -31,12 +42,31 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments or /enrollments.json
   def create
     if @course.price > 0
-      flash[:alert] = "You can not access paid courses"
-      redirect_to course_path(@course)
-    else
-      @enrollment = current_user.buy_course(@course)
-      redirect_to courses_path, notice: "You are enrolled!"
+      @amount = (@course.price*100).to_i
+      customer = Stripe::Customer.create({
+        email: params[:stripeEmail],
+        source: params[:stripeToken],
+      })
+
+      charge = Stripe::Charge.create({
+        customer: customer.id,
+        amount: @amount,
+        description: 'Skill up premium content',
+        currency: 'usd',
+      })
+      
     end
+
+    EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+    EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
+
+    @enrollment = current_user.buy_course(@course)
+    redirect_to course_path(@course), notice: "You are enrolled successfully!"
+
+    rescue Stripe::CardError => e
+      flash[:alert] = e.message
+      redirect_to course_path(@course)      
+
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json
@@ -44,7 +74,7 @@ class EnrollmentsController < ApplicationController
     authorize @enrollment
     respond_to do |format|
       if @enrollment.update(enrollment_params)
-        format.html { redirect_to @enrollment, notice: "Enrollment was successfully updated." }
+        format.html { redirect_to course_path(@enrollment.course), notice: "Rated successfully!" }
         format.json { render :show, status: :ok, location: @enrollment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +85,7 @@ class EnrollmentsController < ApplicationController
 
   # DELETE /enrollments/1 or /enrollments/1.json
   def destroy
-    authorize @enrollment
+    # authorize @enrollment
     @enrollment.destroy
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }

@@ -37,6 +37,22 @@
         = user.last_sign_in_ip
     .card-footer
       %small.text-muted 
+        Course Income: 
+        = number_to_currency(user.course_income)
+       
+        .row        
+        Enrollment Expenses
+        = number_to_currency(user.enrollment_expenses)
+
+        .row        
+        Balance
+        = number_to_currency(user.balance)
+
+        
+
+       
+    .card-footer
+      %small.text-muted 
         %b Email Confirmed: 
         -if user.confirmed_at.present? 
           .badge.rounded-pill.bg-success YES 

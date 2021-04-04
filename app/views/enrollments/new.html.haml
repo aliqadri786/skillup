@@ -3,8 +3,17 @@
   \|
   Skill Up
 
-%h1 New enrollment
+= link_to  course_path(@course), class:"btn btn-dark btn-sm mb-3" do 
+.card 
+  .card-header 
+    %span.h4 Post You Rating
+  .card.body 
+    = render 'form'
+  .card-footer 
 
-= render 'form'
 
-= link_to 'Back', enrollments_path
+
+
+
+
+

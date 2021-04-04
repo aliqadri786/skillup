@@ -49,3 +49,11 @@ gem 'active_storage_validations'
 gem "image_processing"
 gem 'mini_magick', '>= 4.9.5'
 # gem 'omniauth-google-oauth2', '~> 1.0'
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-installer' # in support of wicked_pdf
+gem 'wkhtmltopdf-binary', '~> 0.12.3'
+gem 'wicked' # multistep forms
+gem "cocoon" # edit child forms in parent form
+gem 'stripe'
+# gem 'client_side_validations'
+# gem 'client_side_validations-simple_form'

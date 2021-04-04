@@ -1,16 +1,21 @@
-- if @lesson.present? && lesson == @lesson
-  .shadow-sm.px-2.py-2.text-decoration-none.border.fw-bold
-    .fa.fa-chevron-right
-    = link_to course_lesson_path(@course,lesson) do
-      -# = lesson.row_order_rank + 1
-      = lesson.title
+.d-flex 
+  .lesson-content 
+    - if @lesson.present? && lesson == @lesson
+      .px-2.py-3.fw-bold.shadow-sm.bg-light.border-start.border-primary.border-4
+        %small.fa.fa-play.text-primary
+        = link_to course_lesson_path(@course,lesson), class:"text-decoration-none" do        
+          %span.ms-2.text-dark.fw-bold= truncate(lesson.title, :length => 30)      
     
-   
-- else
-  .shadow-sm.px-2.py-2.text-decoration-none.border
-    = link_to  course_lesson_path(@course,lesson) do
-      -# = lesson.row_order_rank + 1
-      = lesson.title
- 
+    - else
+      .px-2.py-3.shadow-sm.bg-light.rounded.border-top.border-bottom
+        = link_to  course_lesson_path(@course,lesson), class:"text-decoration-none" do
+          -# = lesson.row_order_rank + 1
+          %small.fa.fa-play.text-muted
+          %span.ms-2.fw-bold.text-muted=  truncate(lesson.title, :length => 30)
 
-
+  - if policy(lesson).edit?
+    .lesson-actions.d-flex.align-items-center.justify-content-center.shadow-sm.bg-light.rounded.border-top.border-bottom.px-2
+      = link_to  edit_course_lesson_path(lesson.course,lesson), class:"text-decoration-none text-primary" do 
+        .fa.fa-pencil-alt
+      = link_to  [lesson.course,lesson], method: :delete, data: { confirm: 'Are you sure?' }, class:"text-decoration-none text-danger ms-2" do 
+        .fa.fa-trash

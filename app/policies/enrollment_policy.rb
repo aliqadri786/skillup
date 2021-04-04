@@ -21,6 +21,10 @@ class EnrollmentPolicy < ApplicationPolicy
   def destroy?
     is_owner?
   end
+
+  def certificate?
+    @record.course.lessons_count == @record.course.user_lessons.where(user: @record.user).count 
+  end
   
   private  
 

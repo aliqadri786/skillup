@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :user_lessons, dependent: :nullify
   has_many :comments, dependent: :nullify
   
+  after_create do
+    UserMailer.new_user(self).deliver_later
+  end
   
   def to_s
     email
@@ -57,6 +60,17 @@ class User < ApplicationRecord
       user_lesson.first.increment!(:impressions)
     end
   end
+
+  def calculate_course_income
+    update_column :course_income, (courses.map(&:income).sum)
+    update_column :balance, (course_income - enrollment_expenses)    
+  end
+  
+  def calculate_enrollment_expenses
+    update_column :enrollment_expenses, (enrollments.map(&:price).sum)
+    update_column :balance, (course_income - enrollment_expenses)  
+  end
+  
 
   private 
   def must_have_a_role

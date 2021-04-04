@@ -1,7 +1,8 @@
 .col-sm-6.col-md-3.col-lg-3.mb-3  
-  .card.shadow
+  .card.shadow-sm.border-none
     = link_to course, class:"text-decoration-none text-black" do
-      %img.card-img-top{:alt => "skillup", :src => "https://thumbs.dreamstime.com/b/monarch-orange-butterfly-bright-summer-flowers-background-blue-foliage-fairy-garden-macro-artistic-image-monarch-167030287.jpg"}/
+      - if course.avatar.attached?
+        = image_tag course.avatar, class:"card-img-top"
       .card-body
         %h5.card-title.fw-bold.h6 
           = course.title
@@ -22,6 +23,6 @@
     -#       = link_to course, method: :delete, data: { confirm:'Are you sure?' }, class:"btn btn-sm btn-danger ms-2" do 
     -#         .fa.fa-trash
     -#         Delete
-    = link_to "Approve", approve_course_path(course), method: :patch
+    -# = link_to "Approve", approve_course_path(course), method: :patch
    
            

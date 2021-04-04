@@ -1,0 +1,18 @@
+.container.py-4
+  .card 
+    .progress
+      .progress-bar.bg-success{:style => "width: #{@progress}%"}
+    .card-header 
+      %h5.fw-bold
+        = "#{wizard_steps.index(step)+1} / #{wizard_steps.count}" 
+        = step.to_s.humanize
+    .card-body 
+    .card-footer
+      .float-start
+        = link_to  previous_wizard_path, class:"btn btn-info btn-sm text-white" do
+          .fa.fa-arrow-left 
+          Previous 
+      .float-end
+        = link_to next_wizard_path, class:"btn btn-info btn-sm text-white" do
+          .fa.fa-arrow-right 
+          Skip 

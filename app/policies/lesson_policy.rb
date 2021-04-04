@@ -15,6 +15,7 @@ class LessonPolicy < ApplicationPolicy
 
   def show?
     is_admin? || is_owner? || bought?
+   
   end
 
   def edit?
@@ -44,7 +45,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def bought?
-    @record.course.bought(@user) == false
+    @record.course.bought(@user) == true
   end
 
 end

@@ -3,10 +3,14 @@
   \|
   Skill Up
 
-%h1 Editing course
 
-= render 'form'
 
-= link_to 'Show', @course
-\|
-= link_to 'Back', courses_path
+.container.py-3
+  = link_to  course_path(@course), class:"btn btn-dark btn-sm mb-3" do 
+    .fa.fa-arrow-left 
+    Back to course
+  .card
+    .card-header
+      %h4 Update course
+    .card-body 
+      = render 'form'

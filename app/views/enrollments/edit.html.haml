@@ -4,11 +4,14 @@
   \|
   Skill Up
 
-.container
-  %h1 Editing enrollment
+.container.py-3
+  = link_to  courses_path(@course), class:"btn btn-dark btn-sm mb-3" do 
+    .fa.fa-arrow-left 
+    Back to courses
 
-  = render 'form'
-
-  = link_to 'Show', @enrollment
-  \|
-  = link_to 'Back', enrollments_path
+  .card 
+    .card-header 
+      %span.h4 Post You Rating
+    .card.body.px-3.py-3 
+      = render 'form'
+   

@@ -1,0 +1,17 @@
+You have enrolled to the course
+= link_to @enrollment.course, @enrollment.course
+
+.row 
+Enrollment Id
+= @enrollment.slug
+
+.row 
+Course Price 
+= @enrollment.course.price
+
+.row 
+After completing this course you will be entitled to a certificate of completion.
+.row 
+Regards
+.row 
+= link_to "Skill Up Team", root_url

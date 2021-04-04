@@ -68,7 +68,7 @@
         - if current_user && current_user.has_role?(:student) 
           %li.nav-item.dropdown
             %a#studentDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} 
-              Student
+              Learn
             %ul.dropdown-menu{"aria-labelledby" => "studentDropdown"}
               %li
                 = link_to purchased_courses_path, class:"dropdown-item" do 
@@ -88,7 +88,7 @@
         - if current_user && current_user.has_role?(:teacher) 
           %li.nav-item.dropdown
             %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} 
-              Teacher
+              Teach
             %ul.dropdown-menu{"aria-labelledby" => "teacherDropdown"}
               %li
                 = link_to new_course_path, class:"dropdown-item" do 

@@ -44,7 +44,45 @@
     - @courses.each do |course|
       = render "courses/course", course:course
     
-  .d-flex.justify-content-center.py-5.border-bottom.border-top.mt-4
+  .row.mt-5 
+    .h4.fw-bold Featured topics
+  .row 
+    - @tags.each do |tag|
+      .col-3.mt-3.no-text-decoration
+        = link_to controller: "courses", action: "index", courses_search: { course_tags_tag_id_eq: tag.id } do
+          .h6.fw-bold= tag.name.humanize
+          %small.text-muted
+            = pluralize(tag.course_tags_count,"course")
+     
+    
+
+  .border-bottom.py-4.border-bottom.border-top.mt-5.bg-white
+    .row
+      .col-4
+        .d-flex  
+          .d-flex.align-items-center
+            .fa.fa-clock.text-secondary.fa-2x
+          .px-3  
+            .h6.fw-bolder Go at your own pace
+            .p Enjoy lifetime access to courses on Skillup's website
+
+      .col-4
+        .d-flex.justify-content-center 
+          .d-flex.align-items-center
+            .fa.fa-chalkboard-teacher.text-secondary.fa-2x
+          .px-3  
+            .h6.fw-bolder Learn from industry experts
+            .p Select from top ranked instructors around the world
+
+      .col-4
+        .d-flex.justify-content-end  
+          .d-flex.align-items-center
+            .fa.fa-play.text-secondary.fa-2x
+          .px-3  
+            .h6.fw-bolder Find video courses on almost any topic
+            .p Build your library for your career and personal growth
+  
+  .d-flex.justify-content-center.py-5.mt-4
     .width-30
       %img.home_image_hero.shadow{:alt => "skillup", :src => "/assets/home_instructor.jpg"}
     .width-30.my-auto.ps-5.ms-4

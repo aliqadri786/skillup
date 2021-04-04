@@ -30,7 +30,7 @@ class LessonsController < ApplicationController
     @lessons=@course.lessons.rank(:row_order)
 
     @comment = Comment.new
-    @comments = Comment.all
+   
   end
 
   # GET /lessons/new

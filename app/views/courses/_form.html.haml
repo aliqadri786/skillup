@@ -5,20 +5,20 @@
 
   .form-inputs
     = f.input :title
-    = f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class:"selectize" }
-    = f.input :avatar
-    -# = f.file_field :avatar
-    -# %small= f.error :avatar, class:"text-danger"
+    -# = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class:"selectize" }
+    -# = f.input :avatar
+    -# -# = f.file_field :avatar
+    -# -# %small= f.error :avatar, class:"text-danger"
 
-    -# = f.rich_text_area :description
-    -# %small= f.error :description, class:"text-danger"
-    = f.input :description, as: :rich_text_area
+    -# -# = f.rich_text_area :description
+    -# -# %small= f.error :description, class:"text-danger"
+    -# = f.input :description, as: :rich_text_area
 
-    = f.input :short_description
-    = f.input :language, collection:Course.languages
-    = f.input :level, collection:Course.levels
-    = f.input :price, min:0
-    = f.input :published
+    -# = f.input :short_description
+    -# = f.input :language, collection:Course.languages
+    -# = f.input :level, collection:Course.levels
+    -# = f.input :price, min:0
+    -# = f.input :published
 
-  .form-actions
-    = f.button :submit
+  .form-actions.text-end.mt-2
+    = f.button :submit, "Save and continue"

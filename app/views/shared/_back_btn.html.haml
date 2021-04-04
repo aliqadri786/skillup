@@ -1,0 +1,4 @@
+- paths = session[:paths_visited]
+- path_index = paths.index(@path_name)
+.body--padding
+  = link_to 'Back', paths[path_index - 1] if not current_page?(root_path)

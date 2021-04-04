@@ -1,5 +1,5 @@
 .container.px-4.py-4.bg-white
-  %h1 Listing enrollments
+  %h4 Enrollments
 
   %table.table.table-border
     %thead
@@ -9,6 +9,7 @@
         %th Price
         %th Rating
         %th Review
+        %th 
         %th 
         %th 
         
@@ -25,7 +26,8 @@
             - if policy(enrollment).edit?
               = link_to 'Post Review', edit_enrollment_path(enrollment)
           %td= link_to 'Delete Enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to 'Certificate', certificate_enrollment_path(enrollment, format: :pdf)
 
   %br
 
-  = link_to 'New Enrollment', new_enrollment_path
+  -# = link_to 'New Enrollment', new_enrollment_path

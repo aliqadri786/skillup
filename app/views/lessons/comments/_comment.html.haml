@@ -1,4 +1,20 @@
-= comment.content
-- if policy(comment).destroy?
-  = link_to [@course, @lesson, comment], method: :delete do 
-    .fa.fa-trash
+.bg-light.shadow-sm.mt-2.px-3.py-2
+  .d-flex 
+    .w-50per     
+      = link_to  user_path(comment.user), class:'text-decoration-none' do 
+        .fa.fa-user  
+        %span.ms-2= comment.user.username
+      %span.dates-font.ms-3= "#{time_ago_in_words(comment.updated_at)} ago"
+          
+    .w-50per.text-end 
+      - if policy(comment).destroy?
+        = link_to [@course, @lesson, comment], method: :delete, data:{confirm:"Are you sure?"}, class:'text-danger' do 
+          .fa.fa-trash
+  .py-1 
+    .fa.fa-comment.text-success
+    %span.ms-2= comment.content
+  
+
+
+
+  

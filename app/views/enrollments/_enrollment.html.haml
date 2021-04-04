@@ -3,9 +3,14 @@
     %img.rating-user-img{:alt => "skillup", :src => "https://www.w3schools.com/w3images/team2.jpg"}
   .col-11
     .ps-4
-      .row 
-        .col-11.fw-bold= enrollment.user.username
-        .col-1.text-right.fa.fa-pencil-alt
+      .d-flex 
+        .fw-bold.w-50per
+          = link_to user_path(enrollment.user), class:'text-decoration-none' do
+            = enrollment.user.username
+
+        .w-50per.text-end
+          = link_to edit_course_enrollment_path(@course,enrollment) do 
+            .fa.fa-pencil-alt
       %div
         - 5.times do |r|
           - if enrollment.rating.present? && enrollment.rating < r+1
