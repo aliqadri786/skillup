@@ -12,25 +12,25 @@ MODULES:
 
 Students can: 
 
-Enroll to free courses
-Buy free courses
-Rate Course
-Watch Lessons
-Comment on Lessons
-Get certificate of completion when course is completed
+* Enroll to free courses
+* Buy free courses
+* Rate Course
+* Watch Lessons
+* Comment on Lessons
+* Get certificate of completion when course is completed
 
 Teachers can:
 
-Create Courses
-Track his students
-See course revenues and other stats 
+* Create Courses
+* Track his students
+* See course revenues and other stats 
 
 Admin can:
 
-All above functioalities
-Manage Users
-Tracks App Activity 
-Sees Analytics
+* Manage All above functioalities
+* Manage Users
+* Tracks App Activity 
+* Sees Analytics
 
 
 Following gems are used:
