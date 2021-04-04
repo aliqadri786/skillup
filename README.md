@@ -13,7 +13,7 @@ MODULES:
 Students can: 
 
 * Enroll to free courses
-* Buy free courses
+* Buy paid courses
 * Rate Course
 * Watch Lessons
 * Comment on Lessons
